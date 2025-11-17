@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"/>
+  <title>IR WebRTC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+  <header>
+    <div class="title">IR WebRTC</div>
+    <div id="statusDot" class="dot dot--idle" title="status"></div>
+    <div id="luxBadge" class="badge">lux: --.- lx</div>
+  </header>
+
+  <main>
+    <section class="panel">
+      <div class="row">
+        <label>Token:</label>
+        <input id="token" type="password" value="changeme" />
+        <button id="connect">Connect</button>
+      </div>
+
+      <video id="v" autoplay playsinline muted></video>
+
+      <div class="row">
+        <span>Lux (last): <b id="luxNow">--.- lx</b></span>
+      </div>
+
+      <hr/>
+
+      <div class="row">
+        <label>Range mode:</label>
+        <select id="mode">
+          <option value="pct" selected>PCT</option>
+          <option value="abs">ABS</option>
+        </select>
+      </div>
+
+      <div id="pctRow" class="row">
+        <label>lo %</label>
+        <input id="loPct" type="range" min="0" max="100" step="0.1" value="1.0"/>
+        <span id="loPctVal">1.0</span>
+        <label>hi %</label>
+        <input id="hiPct" type="range" min="0" max="100" step="0.1" value="99.0"/>
+        <span id="hiPctVal">99.0</span>
+        <button id="applyPct">Apply</button>
+      </div>
+
+      <div id="absRow" class="row" style="display:none;">
+        <label>lo</label>
+        <input id="loAbs" type="number" min="0" max="65535" value="0"/>
+        <label>hi</label>
+        <input id="hiAbs" type="number" min="1" max="65535" value="65535"/>
+        <button id="applyAbs">Apply</button>
+      </div>
+
+      <div class="row">
+        <button id="calib">Calib Reload</button>
+        <label><input id="geom" type="checkbox" checked/> Geometry</label>
+      </div>
+
+      <div class="row">
+        <button id="poseStart">Pose ON</button>
+        <button id="poseStop">Pose OFF</button>
+        <button id="recStart">Rec ON</button>
+        <button id="recStop">Rec OFF</button>
+      </div>
+
+      <div class="row">
+        <label>ROI: x1,y1;...;x4,y4</label>
+        <input id="roi" type="text" placeholder="100,100; 540,100; 540,540; 100,540"/>
+        <button id="roiApply">Apply ROI</button>
+        <button id="roiClear">Clear ROI</button>
+      </div>
+
+      <pre id="log" class="log"></pre>
+      <button id="clearLog">Clear Log</button>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
